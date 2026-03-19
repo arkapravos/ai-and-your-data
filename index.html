@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Is Your Favorite AI Doing with Your Data? | Arka Sarkar</title>
+    <meta name="description" content="A side-by-side look at how AI tools handle your data compared to the traditional software you already use every day. The answer might surprise you.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #F7F5F0;
+            --cream-dark: #EDE9E0;
+            --suffolk-blue: #172A47;
+            --suffolk-blue-light: #1E3A5F;
+            --suffolk-blue-lighter: #2A4D7A;
+            --suffolk-gold: #C6A140;
+            --suffolk-gold-dark: #b88d2a;
+            --suffolk-gold-light: #D4B35C;
+            --ink: #2C2C2C;
+            --ink-light: #4A4A4A;
+            --ink-lighter: #7A7A7A;
+            --border: #D8D3C8;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--cream);
+            color: var(--ink);
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.78;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ---- MASTHEAD ---- */
+        .masthead {
+            text-align: center;
+            padding: 2rem 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .masthead-top {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ink-light);
+        }
+        .masthead-top span { color: var(--suffolk-gold-dark); }
+        .masthead-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--ink-lighter);
+            margin-top: 0.3rem;
+        }
+        .masthead-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: var(--ink-lighter);
+            letter-spacing: 0.05em;
+            margin-top: 0.6rem;
+        }
+
+        /* ---- HERO ---- */
+        .hero {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+        }
+        .hero-label {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--suffolk-blue);
+            border: 1.5px solid var(--suffolk-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 2px;
+            margin-bottom: 1.2rem;
+        }
+        .hero-tags {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            color: var(--ink-lighter);
+            letter-spacing: 0.08em;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--ink);
+            margin-bottom: 1.2rem;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--suffolk-gold-dark);
+        }
+        .hero-deck {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.15rem;
+            line-height: 1.65;
+            color: var(--ink-light);
+            max-width: 640px;
+            margin: 0 auto 2rem;
+        }
+
+        /* ---- BYLINE ---- */
+        .byline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .byline-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--suffolk-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--white);
+        }
+        .byline-text { text-align: left; }
+        .byline-name {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--ink);
+        }
+        .byline-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            color: var(--ink-lighter);
+        }
+
+        /* ---- ARTICLE ---- */
+        .article {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+        .article p {
+            margin-bottom: 1.4rem;
+        }
+        .article strong {
+            font-weight: 600;
+        }
+
+        /* Breathing markers between major movements */
+        .breath {
+            text-align: center;
+            margin: 2.8rem 0;
+            color: var(--suffolk-gold-dark);
+            font-size: 0.85rem;
+            letter-spacing: 0.6em;
+        }
+
+        /* Essay-style subheading: not a numbered section, just a thought-turn */
+        .turn {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--suffolk-blue);
+            margin: 3rem 0 1.3rem;
+            padding-top: 1.5rem;
+        }
+
+        .turn-first {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        /* Single pullquote, used once */
+        .aside {
+            margin: 2.5rem 0;
+            padding: 1.5rem 2rem;
+            border-left: 3px solid var(--suffolk-blue);
+            background: linear-gradient(135deg, rgba(23,42,71,0.04), rgba(198,161,64,0.02));
+        }
+        .aside p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--ink);
+            margin-bottom: 0;
+        }
+
+        /* Margin annotation for small contextual notes */
+        .note {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            line-height: 1.55;
+            color: var(--ink-lighter);
+            border-left: 2px solid var(--suffolk-gold);
+            padding-left: 1rem;
+            margin: 2rem 0;
+        }
+
+        /* Comparison table: the single visual anchor */
+        .table-wrapper {
+            margin: 2.5rem 0;
+            overflow-x: auto;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+        .table-wrapper table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+        }
+        .table-wrapper thead {
+            background: var(--suffolk-blue);
+            color: var(--white);
+        }
+        .table-wrapper th {
+            padding: 0.7rem 0.8rem;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            font-size: 0.72rem;
+        }
+        .table-wrapper td {
+            padding: 0.65rem 0.8rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--ink);
+            line-height: 1.45;
+        }
+        .table-wrapper tbody tr:nth-child(even) {
+            background: rgba(23,42,71,0.03);
+        }
+        .table-wrapper tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .table-caption {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: var(--ink-lighter);
+            text-align: center;
+            margin-top: 0.6rem;
+            font-style: italic;
+        }
+
+        /* ---- AUTHOR BIO ---- */
+        .author-bio {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+            border-top: 2px solid var(--suffolk-blue);
+        }
+        .author-bio-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ink-lighter);
+            margin-bottom: 1rem;
+        }
+        .author-bio p {
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: var(--ink-light);
+        }
+
+        /* ---- SOURCES ---- */
+        .sources {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 3rem;
+            border-top: 1px solid var(--border);
+        }
+        .sources h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--ink);
+        }
+        .sources ol {
+            list-style: decimal;
+            padding-left: 1.2rem;
+        }
+        .sources li {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            line-height: 1.6;
+            color: var(--ink-light);
+            margin-bottom: 0.5rem;
+        }
+        .sources a {
+            color: var(--suffolk-blue-lighter);
+            text-decoration: none;
+        }
+        .sources a:hover { text-decoration: underline; }
+
+        /* ---- FOOTER ---- */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: var(--ink-lighter);
+        }
+        .footer a {
+            color: var(--suffolk-blue-lighter);
+            text-decoration: none;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 2rem; }
+            .turn { font-size: 1.3rem; }
+            .article { padding: 0 1rem 3rem; }
+            .table-wrapper { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="masthead">
+        <div class="masthead-top">Sawyer Business School &nbsp;|&nbsp; <span>AI & Strategy</span></div>
+        <div class="masthead-subtitle">Perspectives on AI, Trust, and the Future of Work</div>
+        <div class="masthead-meta">March 2026 &nbsp;&middot;&nbsp; Vol. 3</div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-label">Think Piece</div>
+        <div class="hero-tags">AI & Society &middot; Privacy &middot; Data &middot; Trust</div>
+        <h1>What Is Your Favorite AI Doing with <em>Your</em> Data?</h1>
+        <p class="hero-deck">And is it really any different from the software you have been trusting for years? I went looking for the answer. It was not what I expected.</p>
+        <div class="byline">
+            <div class="byline-avatar">AS</div>
+            <div class="byline-text">
+                <div class="byline-name">Arka Sarkar, PhD</div>
+                <div class="byline-title">Assistant Professor of Marketing, Sawyer Business School, Suffolk University</div>
+            </div>
+        </div>
+    </div>
+
+    <article class="article">
+
+        <p>There is a question that keeps surfacing in conversations about AI, and it tends to carry a weight that goes beyond curiosity. The question is some version of: <em>Is AI learning everything about me? Are these companies harvesting my conversations to train their models?</em></p>
+
+        <p>It is a reasonable thing to wonder about. And I think it deserves a careful answer rather than a reassuring one.</p>
+
+        <p>So I did something that turned out to be more revealing than I expected. I went through the privacy policies, compliance certifications, documented incidents, and public statements of the four major AI labs: OpenAI, Anthropic, Google, and Microsoft. Line by line. And then, because the question that really interests me is the <em>comparative</em> one, I did the same for the traditional software that most of us have been using for years without much worry. Microsoft Office. Dropbox. Oracle. The tools that hold our documents, our data, and our files.</p>
+
+        <p>What I found is that the two stories are more entangled than most people realize. And the trust gap between them may be pointing in a direction that is worth reconsidering.</p>
+
+        <div class="breath">&#9671; &nbsp; &#9671; &nbsp; &#9671;</div>
+
+        <p class="turn turn-first">The short answer is: it depends on which version you are using</p>
+
+        <p>Every major AI company has quietly converged on the same basic structure. There is a consumer tier and an enterprise tier, and they operate under fundamentally different rules.</p>
+
+        <p>On the consumer side, free versions of ChatGPT, standard Gemini, and consumer Copilot all use your conversations to help train future models. This is the default. But every single one of them offers a way to turn it off. OpenAI has a toggle in Settings and a privacy portal. Anthropic, which until August 2025 did not train on any consumer conversations at all, now presents users with a choice the first time they log in. Google lets you disable "Keep Activity." Microsoft de-identifies the data before using it and provides its own opt-out toggle.</p>
+
+        <p>On the enterprise and API side, the picture is uniform and unambiguous: none of them use your data for training. OpenAI has maintained this policy since March 2023. Anthropic, Google Workspace, Microsoft 365 Copilot, and Azure OpenAI all make the same contractual commitment. Some offer Zero Data Retention, where even temporary logs are wiped clean.</p>
+
+        <p>This is, I think, the single most important thing to understand about AI and data privacy right now. The line that matters is not "AI vs. traditional software." It is "consumer tier vs. enterprise tier." And most of the fear I encounter seems to conflate the two.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Consumer Default</th>
+                        <th>Can You Opt Out?</th>
+                        <th>Enterprise/API Trains?</th>
+                        <th>Retention (Opted Out)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>OpenAI</strong></td>
+                        <td>Trains on conversations</td>
+                        <td>Yes (toggle + portal)</td>
+                        <td>Never</td>
+                        <td>30 days</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anthropic</strong></td>
+                        <td>User chooses</td>
+                        <td>Yes (toggle)</td>
+                        <td>Never</td>
+                        <td>30 days</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google</strong></td>
+                        <td>Trains on conversations</td>
+                        <td>Yes (Keep Activity off)</td>
+                        <td>Never</td>
+                        <td>72 hours*</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Microsoft</strong></td>
+                        <td>Trains (de-identified)</td>
+                        <td>Yes (toggle)</td>
+                        <td>Never</td>
+                        <td>18 months</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-caption">*Google retains conversations reviewed by humans for up to 3 years, even if the user later deletes their activity.</div>
+
+        <p>That asterisk on Google is worth pausing on. If your Gemini conversation gets flagged for human review while Keep Activity is on, that conversation can stay in Google's systems for three years, regardless of what you do afterward. It is a meaningful policy detail, and the kind of thing that, in my view, warrants closer attention than it has received.</p>
+
+        <p>There is also a wrinkle in OpenAI's system that is easy to miss. Even with training turned off, if you click the thumbs-up or thumbs-down button on a response, that feedback can pull the entire conversation back into the training pipeline. It is documented in their help pages, but I suspect very few users are aware of it.</p>
+
+        <p class="turn">What about the personalization features? Memory, custom instructions, style preferences?</p>
+
+        <p>This is the part that seems to trigger the most anxiety, and understandably so. When ChatGPT "remembers" your preferences, or Claude knows your name and your writing style, it can feel like the system is assembling a profile of you. Studying you.</p>
+
+        <p>The actual mechanics, as best I can tell from the documentation, are different from what the anxiety suggests. These features operate at the individual account level. They exist to make your next conversation more useful. They are not scraped and fed into the foundation model that millions of other people interact with. When you save custom instructions or style preferences, that information lives in your session context. It stays with you.</p>
+
+        <p>OpenAI's Memory feature follows the same training toggle as everything else: opt out, and your memories stay out. Anthropic's memory system was designed to be user-controlled and session-scoped. Google's saved preferences fall under the same Keep Activity framework.</p>
+
+        <p>So the instinct that says these features are about improving <em>your</em> experience, and not about quietly feeding some larger data machine, appears to be correct. I say "appears" deliberately, because policies can change. In Anthropic's case, they already changed once. A healthy degree of watchfulness seems warranted, even when the current evidence is reassuring.</p>
+
+        <p class="turn">Here is where the comparison gets interesting</p>
+
+        <p>When I started looking at compliance certifications, I expected a clear gap between the established enterprise tools and the newer AI platforms. I expected Oracle and Microsoft and Dropbox to be in a league of their own. And in some ways they are. Microsoft Azure carries over 100 certifications. Oracle's cloud infrastructure has deep FedRAMP and HIPAA coverage.</p>
+
+        <p>But the AI labs have closed the distance faster than I anticipated.</p>
+
+        <p>Microsoft Azure OpenAI inherits Azure's full compliance portfolio, including SOC 1/2/3, ISO 27001, FedRAMP High, HIPAA, and PCI-DSS. Google Gemini became the first generative AI assistant to receive independent FedRAMP High authorization in March 2025. OpenAI holds SOC 2 Type II, the ISO 27001 family, and HIPAA BAA. Anthropic maintains SOC 2 Type II, ISO 27001, ISO 42001, and HIPAA BAA, with Claude available for FedRAMP High workloads through AWS GovCloud.</p>
+
+        <p>And then I looked at some of the tools that are trusted without question in academic and professional settings, and the comparison got a bit uncomfortable.</p>
+
+        <p>Stata, for instance, holds virtually no cloud security certifications. No SOC 2. No ISO 27001. No HIPAA. No FedRAMP. It is desktop software, and organizations that use it for sensitive data are expected to provide their own security controls. The same is largely true for SPSS in many deployment setups. I am not suggesting these are bad tools. I use them. Many of us do. But the compliance posture is objectively narrower than what the AI labs now offer, and I think that comparison is worth sitting with for a moment.</p>
+
+        <div class="note">All four major AI labs hold ISO 42001, the new international standard for AI governance and responsible AI management. This is a certification that most traditional enterprise software vendors have not pursued. It is one of the few areas where the AI companies appear to be ahead of the incumbents.</div>
+
+        <p class="turn">The documented track record tells a story I was not expecting</p>
+
+        <p>I want to be careful here. I am not trying to indict traditional software companies. They have served us well in many ways, and they operate at scales that make occasional missteps statistically likely. But the facts are the facts, and they are relevant to the question of where we place our trust.</p>
+
+        <p>Oracle settled a class action lawsuit for $115 million in 2024 after allegations that the company had built a data aggregation system compiling dossiers on over five billion people, using cookies, tracking pixels, and offline purchase data. Oracle's Data Cloud pulled from more than 200 partners and covered 115 million American households.</p>
+
+        <p>Microsoft has accumulated $1.59 billion in penalties since 2000, across 23 recorded privacy and data-related violations. A 2018 Dutch government investigation found that Microsoft Office applications were conducting large-scale collection of keystroke and spelling-checker data across 300,000 government computers. In 2023, the FTC fined Microsoft $20 million for illegally collecting children's data through Xbox.</p>
+
+        <p>Dropbox experienced a 2012 breach that exposed 68 million user credentials (though this only came to light publicly in 2016), followed by a 2024 Dropbox Sign breach that compromised emails, usernames, phone numbers, hashed passwords, and API keys.</p>
+
+        <p>The AI companies' incidents, by comparison, are real but smaller in scale. OpenAI's most significant regulatory action was Italy's &euro;15 million GDPR fine in December 2024. Researchers demonstrated that targeted API queries could extract memorized training examples from ChatGPT, which is a legitimate technical concern. Over 100,000 ChatGPT credentials appeared on the dark web, though that was traced to malware on users' own devices, not to an OpenAI system breach.</p>
+
+        <p>I want to be careful about what conclusion to draw from all of this. It probably does not mean AI companies are inherently more trustworthy. They are younger, they operate at a different scale, and time will tell. But it does suggest, I think, that the level of anxiety directed at AI tools is not proportional to the documented evidence when compared against the tools that already hold our data.</p>
+
+        <div class="aside">
+            <p>"A December 2025 YouGov survey found that only 5 percent of Americans trust AI 'a lot,' even though 35 percent use it weekly. A Relyance AI survey found that 81 percent of consumers assume AI companies are lying about their privacy practices. The distrust appears to be operating upstream of the evidence."</p>
+        </div>
+
+        <p class="turn">Why the gap in trust persists</p>
+
+        <p>I have been thinking about this, and I believe several things are happening at once.</p>
+
+        <p>There is an opacity problem, and it is legitimate. When data goes into a traditional database, most people have a rough mental model of where it ends up. A table. A server. A file. When data enters an AI model, it undergoes a transformation that is genuinely difficult to reason about. The boundary between "stored" and "learned" gets blurry, and researchers have shown that LLMs can sometimes reproduce memorized content. That blurriness is real, and I do not think it should be dismissed.</p>
+
+        <p>There is a novelty effect. We have normalized decades of data collection by the software we grew up with. Microsoft telemetry, Oracle tracking, Google analytics: these feel like background noise at this point. An AI system "learning from" conversations triggers something more visceral. The word "learning" does a lot of psychological heavy lifting. It implies something almost human, and that intimacy is unsettling in a way that "data storage" is not.</p>
+
+        <p>And there is asymmetric media coverage. Italy banning ChatGPT in 2023 was a global headline for weeks. Oracle's $115 million surveillance settlement registered mostly in trade publications. The AI stories feel like stories about the future, which makes them feel more urgent and more personal. The traditional software stories feel like business news.</p>
+
+        <p>None of this means the fear is irrational. I think a better way to characterize it is that the fear is <em>disproportionate</em>, at least relative to the documented risks on both sides. And disproportionate fear has consequences. It keeps people from using tools that could make their work substantially better.</p>
+
+        <p class="turn">But there are genuinely new risks, and they are worth understanding</p>
+
+        <p>I do not want to leave the impression that AI tools are simply equivalent to traditional software with a different interface. They are not. There are attack surfaces here that have no parallel in the world of databases and spreadsheets, and I think anyone making decisions about AI adoption should be aware of them.</p>
+
+        <p>Prompt injection has been ranked the number one LLM security risk by OWASP for three consecutive years. It is not a bug that can be patched. It is an architectural limitation: large language models cannot reliably distinguish between instructions and data. This has led to demonstrated exploits, including a 2025 GitHub Copilot vulnerability that enabled remote code execution through poisoned code comments, a hijacked Google Gemini session triggered by a malicious calendar invite, and a Slack AI data exfiltration through knowledge base poisoning.</p>
+
+        <p>Training data extraction is a demonstrated reality. Researchers showed that roughly $200 in API queries could pull thousands of verbatim memorized examples out of ChatGPT. Related work on embedding inversion suggests that vector embeddings, widely assumed to be safe proxies for raw text, can sometimes be reversed to reconstruct original content.</p>
+
+        <p>Data poisoning is perhaps the most concerning for organizations building AI-powered knowledge systems. The PoisonedRAG attack demonstrated that inserting just five malicious documents into a corpus of millions could cause the system to return attacker-controlled false answers 90 percent of the time for targeted queries.</p>
+
+        <p>The frontier labs are investing heavily in defenses. Anthropic activated its ASL-3 safeguards in May 2025. OpenAI maintains a Preparedness Framework with capability evaluations and thresholds. Google DeepMind's Frontier Safety Framework uniquely assesses models for deceptive alignment. These are serious, well-resourced efforts. But the 2025 AI Safety Index from the Future of Life Institute concluded that capabilities are still outpacing risk management across the industry, and my sense is that this assessment is probably fair.</p>
+
+        <p>These risks are real. They are also engineering problems that are receiving enormous attention and resources. They are reasons for informed caution, not for avoidance.</p>
+
+        <div class="breath">&#9671; &nbsp; &#9671; &nbsp; &#9671;</div>
+
+        <p>So where does all of this leave us?</p>
+
+        <p>My best reading of the evidence is something like this. The enterprise tiers of the major AI platforms now offer data protections that are, in most measurable respects, comparable to what traditional enterprise software provides. In some areas, like AI-specific governance certifications, they may even be ahead. The consumer tiers require more attention. The defaults vary, the opt-out mechanisms have exceptions, and the policies can change. All of those things are true.</p>
+
+        <p>But I think the more useful question, the one I keep coming back to, is whether we are applying our scrutiny evenly. The tools that already hold our most sensitive data have track records that include billion-dollar penalties, massive data breaches, and covert data collection. The AI tools, which are newer and more visible, have considerably smaller documented incidents. That comparison is not a reason to trust AI blindly. It is a reason to wonder whether our sense of risk is being shaped more by familiarity than by evidence.</p>
+
+        <p>My practical advice, for what it is worth: match the product tier to the sensitivity of the work. Use enterprise or API tiers with no-training guarantees for anything involving identifiable or proprietary data. Use consumer tiers for general-purpose work, and take the ten seconds it requires to opt out of training. And maybe, the next time you find yourself uploading sensitive files to a tool that has been around for twenty years without reading its privacy policy, ask yourself whether you would extend the same level of easy trust to a tool that was built last year.</p>
+
+        <p>The answer might be interesting.</p>
+
+    </article>
+
+    <div class="author-bio">
+        <div class="author-bio-label">About the Author</div>
+        <p><strong>Arka Sarkar</strong> is an Assistant Professor of Marketing at Suffolk University's Sawyer Business School, where he teaches courses that most business schools have not yet imagined, from tackling wicked global problems to marketing with generative AI. He is the leading voice of AI at Suffolk and one of the leaders of the SAIL (Sawyer AI Leadership Collaborative) framework for AI adoption. He is a member of the inaugural cohort of Perplexity Business Fellows and a 2025 Innovative Teaching Award recipient. He writes about AI adoption, marketing strategy, and the future of learning.</p>
+    </div>
+
+    <div class="sources">
+        <h2>Sources and Further Reading</h2>
+        <ol>
+            <li>OpenAI (2026). "How Your Data Is Used to Improve Model Performance." <a href="https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/" target="_blank">Read &rarr;</a></li>
+            <li>OpenAI Help Center (2026). "How Your Data Is Used to Improve Model Performance." <a href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance" target="_blank">Read &rarr;</a></li>
+            <li>OpenAI (2024). "Memory and New Controls for ChatGPT." <a href="https://openai.com/index/memory-and-new-controls-for-chatgpt/" target="_blank">Read &rarr;</a></li>
+            <li>OpenAI Developer Platform (2026). "Data Controls in the OpenAI Platform." <a href="https://developers.openai.com/api/docs/guides/your-data" target="_blank">Read &rarr;</a></li>
+            <li>Anthropic (2025). "Updates to Consumer Terms and Privacy Policy." <a href="https://www.anthropic.com/news/updates-to-our-consumer-terms" target="_blank">Read &rarr;</a></li>
+            <li>Anthropic Privacy Center (2026). "Is My Data Used for Model Training?" <a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training" target="_blank">Read &rarr;</a></li>
+            <li>Anthropic Privacy Center (2026). "How Long Do You Store My Data?" <a href="https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data" target="_blank">Read &rarr;</a></li>
+            <li>Google Support (2026). "Gemini Apps Privacy Hub." <a href="https://support.google.com/gemini/answer/13594961?hl=en" target="_blank">Read &rarr;</a></li>
+            <li>Google Blog (2025). "Gemini App Personalizes Responses, Plus New Privacy Controls." <a href="https://blog.google/products-and-platforms/products/gemini/temporary-chats-privacy-controls/" target="_blank">Read &rarr;</a></li>
+            <li>Google Workspace (2026). "Generative AI in Google Workspace Privacy Hub." <a href="https://support.google.com/a/answer/15706919?hl=en" target="_blank">Read &rarr;</a></li>
+            <li>Google Cloud (2024). "Generative AI, Privacy, and Google Cloud." Whitepaper. <a href="https://services.google.com/fh/files/misc/genai_privacy_google_cloud_202308.pdf" target="_blank">Read &rarr;</a></li>
+            <li>Microsoft Support (2026). "Privacy FAQ for Microsoft Copilot." <a href="https://support.microsoft.com/en-us/topic/privacy-faq-for-microsoft-copilot-27b3a435-8dc9-4b55-9a4b-58eeb9647a7f" target="_blank">Read &rarr;</a></li>
+            <li>Microsoft Learn (2026). "Data, Privacy, and Security for Microsoft 365 Copilot." <a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy" target="_blank">Read &rarr;</a></li>
+            <li>Anthropic (2025). "Claude in Amazon Bedrock: Approved for FedRAMP High and DoD IL4/5 Workloads." <a href="https://www.anthropic.com/news/claude-in-amazon-bedrock-fedramp-high" target="_blank">Read &rarr;</a></li>
+            <li>Brosman Cyber Advisory (2025). "AI and FedRAMP: How Leading Models Are Getting Government-Ready." <a href="https://brocyber.com/aifedramp" target="_blank">Read &rarr;</a></li>
+            <li>FedScoop (2025). "ChatGPT Gets One Step Closer to Widespread Government Use." <a href="https://fedscoop.com/chatgpt-gets-one-step-closer-to-widespread-government-use/" target="_blank">Read &rarr;</a></li>
+            <li>CBS News (2024). "Oracle Settles Suit Over Tracking Your Data for $115M." <a href="https://www.cbsnews.com/sanfrancisco/news/oracle-115m-data-tracking-lawsuit-settlement-how-to-file-claim/" target="_blank">Read &rarr;</a></li>
+            <li>Bleeping Computer (2023). "Microsoft to Pay $20 Million for Xbox Children Privacy Violations." <a href="https://www.bleepingcomputer.com/news/microsoft/microsoft-to-pay-20-million-for-xbox-children-privacy-violations/" target="_blank">Read &rarr;</a></li>
+            <li>Bitdefender (2018). "Microsoft's Data Collection Approach Violates GDPR." <a href="https://www.bitdefender.com/en-us/blog/businessinsights/microsofts-data-collection-approach-violates-gdpr-hefty-fine-awaits" target="_blank">Read &rarr;</a></li>
+            <li>Kiteworks (2024). "Insights From the Dropbox Sign Breach." <a href="https://www.kiteworks.com/cybersecurity-risk-management/dropbox-sign-breach/" target="_blank">Read &rarr;</a></li>
+            <li>The Hacker News (2024). "Italy Fines OpenAI &euro;15 Million for ChatGPT GDPR Data Privacy Violations." <a href="https://thehackernews.com/2024/12/italy-fines-openai-15-million-for.html" target="_blank">Read &rarr;</a></li>
+            <li>YouGov (2025). "Most Americans Use AI But Still Don't Trust It." <a href="https://yougov.com/en-us/articles/53701-most-americans-use-ai-but-still-dont-trust-it" target="_blank">Read &rarr;</a></li>
+            <li>University of Melbourne/KPMG (2025). "Global Study Reveals Trust of AI Remains a Critical Challenge." <a href="https://mbs.edu/news/global-study-reveals-trust-of-ai-remains-a-critical-challenge" target="_blank">Read &rarr;</a></li>
+            <li>Relyance AI (2025). "Consumer AI Trust Survey: 82% See Data Loss Threat." <a href="https://www.relyance.ai/consumer-ai-trust-survey-2025" target="_blank">Read &rarr;</a></li>
+            <li>OWASP (2025). "Top 10 for LLM Applications." Prompt Injection ranked #1, 2023&ndash;2025.</li>
+            <li>Sombra (2026). "LLM Security Risks in 2026: Prompt Injection, RAG, and Shadow AI." <a href="https://sombrainc.com/blog/llm-security-risks-2026" target="_blank">Read &rarr;</a></li>
+            <li>Springer Nature (2025). "A Survey on Privacy Risks and Protection in Large Language Models." <em>Journal of King Saud University Computer and Information Sciences.</em> <a href="https://link.springer.com/article/10.1007/s44443-025-00177-1" target="_blank">Read &rarr;</a></li>
+            <li>MDPI (2026). "Prompt Injection Attacks in LLMs and AI Agent Systems: A Comprehensive Review." <em>Information</em>, 17(1), 54. <a href="https://www.mdpi.com/2078-2489/17/1/54" target="_blank">Read &rarr;</a></li>
+        </ol>
+    </div>
+
+    <footer class="footer">
+        &copy; 2026 Arka Sarkar. All rights reserved. &middot; <a href="https://www.suffolk.edu/business" target="_blank">Sawyer Business School, Suffolk University</a>
+    </footer>
+
+</body>
+</html>
